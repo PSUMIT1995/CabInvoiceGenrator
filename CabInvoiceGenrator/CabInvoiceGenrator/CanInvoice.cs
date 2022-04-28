@@ -11,6 +11,8 @@ namespace CabInvoiceGenrator
         const int COST_PER_KM = 10;
         const int COST_PER_MINUTE = 1;
         const int MINIMUM_FARE = 5;
+
+        List<Ride> rides = new List<Ride>();
         public int CalculateFare(int distance, int time)
         {
             int fare = (distance * COST_PER_KM) + (time * COST_PER_MINUTE);
@@ -21,6 +23,24 @@ namespace CabInvoiceGenrator
             }
             return MINIMUM_FARE;
 
+        }
+        public void AddRide(int distance, int time)
+        {
+            rides.Add(new Ride()
+            {
+                distance = distance,
+                time = time
+            });
+        }
+        public double CalculateAggregate()
+        {
+            int fare = 0;
+
+            foreach (Ride ride in rides)
+            {
+                fare += CalculateFare(ride.distance, ride.time);
+            }
+            return fare;
         }
     }
 }
