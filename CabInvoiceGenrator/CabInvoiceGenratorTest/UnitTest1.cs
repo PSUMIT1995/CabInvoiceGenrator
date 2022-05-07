@@ -31,26 +31,36 @@ namespace CabInvoiceGenratorTest
             Assert.AreEqual(5, fare);
         }
 
+
+        //Invoice Generator should return total number of rides.
+        [TestMethod]
+        public void AddMultipleRideToCheckTotaltNoOfRide()
+        {
+            CabInvoice cabInvoice = new CabInvoice();
+            cabInvoice.AddRide(2, 5);
+            cabInvoice.AddRide(12, 15);
+            var invoiceSummary = cabInvoice.CalculateAggregate();
+            Assert.AreEqual(2, invoiceSummary.TotalNoOfRides);
+        }
+        //Invoice Generator should return total fair.
         [TestMethod]
         public void AddMultipleRideToCheckTotalFair()
         {
-            //Arrange
             CabInvoice cabInvoice = new CabInvoice();
-            cabInvoice.AddRide(4, 5);
-            cabInvoice.AddRide(15, 25);
+            cabInvoice.AddRide(2, 5);
+            cabInvoice.AddRide(12, 15);
             var invoiceSummary = cabInvoice.CalculateAggregate();
-            //Assert
-            Assert.AreEqual(220, invoiceSummary.TotalFare);
+            Assert.AreEqual(160, invoiceSummary.TotalFare);
         }
-        //Invoice Generator should return average fare.
+        //Invoice Generator should return average fair.
         [TestMethod]
-        public void AddMultipleRideToCheckAvgFare()
+        public void AddMultipleRideToCheckAvgFair()
         {
             CabInvoice cabInvoice = new CabInvoice();
-            cabInvoice.AddRide(4, 5);
-            cabInvoice.AddRide(15, 25);
+            cabInvoice.AddRide(2, 5);
+            cabInvoice.AddRide(12, 15);
             var invoiceSummary = cabInvoice.CalculateAggregate();
-            Assert.AreEqual(110, invoiceSummary.AvgFare);
+            Assert.AreEqual(80, invoiceSummary.AvgFare);
         }
     }
 }
